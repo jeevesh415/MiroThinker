@@ -375,6 +375,8 @@ We have released the **MiroThinker v0.1** series, including both SFT and DPO var
 
 ## 🚀 Quick Start
 
+For optimal usage, we recommend using MiroThinker with this tool-enabled agent framework and thinking mode enabled.
+
 ### Prerequisites
 
 - 🐍 **Python 3.10+**
@@ -888,6 +890,21 @@ bash scripts/collect_trace_qwen3.sh
 1. **Review logs**: Check `logs/` directory for detailed error messages
 1. **Verify data path**: Ensure benchmark data is downloaded and in correct location
 
+#### **Q: `uv sync` fails with memory allocation error on WSL**
+
+**A:** WSL2 imposes a memory cap that can cause `uv sync` to fail when building heavy packages (e.g. `transformers`, `pillow`). Two options:
+
+1. **Increase WSL2 memory limit** (recommended): Create or edit `%UserProfile%\.wslconfig` on your Windows host, then restart WSL (`wsl --shutdown`):
+   ```ini
+   [wsl2]
+   memory=8GB
+   ```
+
+2. **Limit parallel package builds** (no restart required): Set the `UV_CONCURRENT_BUILDS` environment variable before running `uv sync`:
+   ```bash
+   UV_CONCURRENT_BUILDS=1 uv sync
+   ```
+
 #### **Q: Out of memory errors**
 
 **A:** Solutions:
@@ -960,6 +977,13 @@ If you find this project useful in your research, please consider citing:
   author={MiroMind Team and Bai, S. and Bing, L. and Lei, L. and Li, R. and Li, X. and Lin, X. and Min, E. and Su, L. and Wang, B. and Wang, L. and Wang, L. and Wang, S. and Wang, X. and Zhang, Y. and Zhang, Z. and others},
   journal={arXiv preprint arXiv:2603.15726},
   year={2026}
+}
+
+@article{miromind2025mirothinker,
+  title={MiroThinker: Pushing the Performance Boundaries of Open-Source Research Agents via Model, Context, and Interactive Scaling},
+  author={MiroMind Team and Bai, Song and Bing, Lidong and Chen, Carson and Chen, Guanzheng and Chen, Yuntao and Chen, Zhe and Chen, Ziyi and Dong, Xuan and others},
+  journal={arXiv preprint arXiv:2511.11793},
+  year={2025}
 }
 ```
 
